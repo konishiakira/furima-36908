@@ -47,7 +47,7 @@
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| postal_code   | integer    | null: false                    |
+| postal_code   | string     | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | city_address  | string     | null: false                    |
@@ -71,5 +71,5 @@
 ### Association
 
 - belongs_to :item
-- has_one :send
+- has_one :item_send
 - belongs_to :user
