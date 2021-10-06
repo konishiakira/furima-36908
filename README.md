@@ -8,8 +8,12 @@
 | ------------------ | ------ | -------------------- |
 | email              | string | null: false          |
 | encrypted_password | string | null: false          |
-| name               | string | null: false          |
+| f_name             | string | null: false          |
+| l_name             | string | null: false          |
+| f_name_f           | string | null: false          |
+| l_name_f           | string | null: false          |
 | birthday           | text   | null: false          |
+
 
 ### Association
 
