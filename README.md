@@ -12,13 +12,13 @@
 | l_name             | string | null: false          |
 | f_name_f           | string | null: false          |
 | l_name_f           | string | null: false          |
-| birthday           | text   | null: false          |
+| birthday           | data   | null: false          |
 
 
 ### Association
 
 - has_many :items
-- has_one :buy_logs
+- has_many :buy_logs
 
 
 ## items テーブル
@@ -31,7 +31,7 @@
 | category           | string     | null: false                    |
 | p_status           | string     | null: false                    |
 | shipping_charges   | string     | null: false                    |
-| shipping_area      | string     | null: false                    |
+| shipping_area_id   | integer    | null: false                    |
 | delivery_date_days | date       | null: false                    |
 | price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
@@ -50,12 +50,13 @@
 | city          | string     | null: false,                   |
 | city_address  | string     | null: false,                   |
 | building_name | string     | null: false,                   |
-| send_tel      | integer    | null: false,                   |
+| send_tel      | string     | null: false,                   |
+| buy_log       | string     | null: false, foreign_key: true |
 
 
 ### Association
 
-- has_one :buy_logs
+- belongs_to :buy_logs
 
 ## buy_logs テーブル
 
@@ -63,11 +64,10 @@
 | --------------- | ---------- | ------------------------------ |
 | user            | references | null: false, foreign_key: true |
 | item            | references | null: false, foreign_key: true |
-| send            | references | null: false, foreign_key: true |
 
 
 ### Association
 
 - belongs_to :items
-- belongs_to :sends
+- has_one :sends
 - belongs_to :users
