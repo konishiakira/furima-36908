@@ -4,16 +4,16 @@
 
 ## users テーブル
 
-| Column             | Type   | Options              |
-| ------------------ | ------ | -------------------- |
-| email              | string | null: false,includes |
-| encrypted_password | string | null: false          |
-| nickname           | string | null: false          |
-| f_name             | string | null: false          |
-| l_name             | string | null: false          |
-| f_name_f           | string | null: false          |
-| l_name_f           | string | null: false          |
-| birthday           | date   | null: false          |
+| Column             | Type   | Options                  |
+| ------------------ | ------ | ------------------------ |
+| email              | string | null: false,unique: true |
+| encrypted_password | string | null: false              |
+| nickname           | string | null: false              |
+| f_name             | string | null: false              |
+| l_name             | string | null: false              |
+| f_name_f           | string | null: false              |
+| l_name_f           | string | null: false              |
+| birthday           | date   | null: false              |
 
 
 ### Association
@@ -28,22 +28,22 @@
 | --------------------- | ---------- | ------------------------------ |
 | product_name          | string     | null: false                    |
 | p_explanation         | text       | null: false                    |
-| category_id           | numeric    | null: false                    |
-| p_status_id           | numeric    | null: false                    |
-| shipping_charges_id   | numeric    | null: false                    |
-| shipping_area_id      | numeric    | null: false                    |
-| delivery_date_days_id | numeric    | null: false                    |
+| category_id           | integer    | null: false                    |
+| p_status_id           | integer    | null: false                    |
+| shipping_charges_id   | integer    | null: false                    |
+| shipping_area_id      | integer    | null: false                    |
+| delivery_date_days_id | integer    | null: false                    |
 | price                 | integer    | null: false                    |
 | user                  | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- has_one :buy_logs
-- belongs_to :users
+- has_one :buy_log
+- belongs_to :user
 
 
-## sends テーブル
+## item_sends テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
@@ -51,7 +51,7 @@
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | city_address  | string     | null: false                    |
-| building_name | string     | null: false                    |
+| building_name | string     |                                |
 | send_tel      | string     | null: false                    |
 | buy_log       | references | null: false, foreign_key: true |
 
