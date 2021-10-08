@@ -13,20 +13,14 @@ class User < ApplicationRecord
   validates :nickname, presence: true
   # ニックネームが必須であること。OK
 
-  # validates :email,
-  #           format: { with: /\A[\w+-.]+@[a-z\d-.]+.[a-z]+\z/i}
-            # メールアドレスは、@を含む必要があること。OK
-
   validates :password,
             length: { minimum: 6 },
-            # format: { with: /\A[a-zA-Z0-9]+\z/},
             format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i },
             confirmation: true
   validates :password_confirmation, presence: true
   # パスワードは、6文字以上での入力が必須であること OK
   # パスワードは、半角英数字混合での入力が必須であること OK
   # パスワードとパスワード（確認）は、値の一致が必須であること。 OK
-  # validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
 
   validates :f_name, presence: true,
             format: { with: /\A[ぁ-んァ-ン一-龥]/}
