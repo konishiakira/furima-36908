@@ -120,6 +120,26 @@
   </div>
   <%# /FURIMAの特徴 %>
 
+
+
+<%# <h1>記事一覧</h1> %>
+<%# <%= link_to "投稿する", new_article_path, class:"post" %>
+
+<%# <% @articles.each do |article| %>
+  <%# <div class="article"> %>
+    <%# <div class="article-genre"> %>
+      <%# <%= article.genre.name %>
+    <%# </div> %>
+    <%# <div class="article-title"> %>
+      <%# <%= article.title %>
+    <%# </div> %>
+    <%# <div class="article-text"> %>
+      <%# <%= article.text %>
+    <%# </div> %>
+  <%# </div> %>
+<%# <% end %>
+
+
   <%# 商品一覧 %>
   <div class='item-contents'>
     <h2 class='title'>ピックアップカテゴリー</h2>
@@ -129,6 +149,9 @@
     <ul class='item-lists'>
 
       <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
+
+
+      <%# ↓元々 %>
       <li class='list'>
         <%= link_to "#" do %>
         <div class='item-img-content'>
@@ -157,8 +180,31 @@
       </li>
       <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
 
+
+<%# | Column                | Type       | Options                        |
+| --------------------- | ---------- | ------------------------------ |
+| product_name          | string     | null: false                    |
+| p_explanation         | text       | null: false                    |
+| category_id           | integer    | null: false                    |
+| p_status_id           | integer    | null: false                    |
+| shipping_charges_id   | integer    | null: false                    |
+| shipping_area_id      | integer    | null: false                    |
+| delivery_date_days_id | integer    | null: false                    |
+| price                 | integer    | null: false                    |
+| user                  | references | null: false, foreign_key: true | %>
+
+
       <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
       <%# 商品がある場合は表示されないようにしましょう %>
+
+  <%#= link_to image_tag(prototype.image, class: :card__img), prototype_path(prototype.id)%>
+  <%# <div class="card__body"> %>
+    <%#= link_to prototype.title, prototype_path(prototype.id), class: :card__title%>
+    <%# <p class="card__summary"> %>
+      <%#= prototype.catch_copy %>
+    <%# </p> %>
+    <%#= link_to "by #{prototype.user.name}", user_path(prototype.user), class: :card__user %>
+
       <li class='list'>
         <%= link_to '#' do %>
         <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -176,13 +222,15 @@
         </div>
         <% end %>
       </li>
+
       <%# //商品がある場合は表示されないようにしましょう %>
       <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
     </ul>
   </div>
   <%# /商品一覧 %>
 </div>
-<%= link_to('#', class: 'purchase-btn') do %>
+        <%# <% <li><%= link_to 'ログイン', new_user_session_path, class: "login" %>
+<%= link_to(new_item_path, class: 'purchase-btn') do %>
   <span class='purchase-btn-text'>出品する</span>
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
 <% end %>

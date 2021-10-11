@@ -29,7 +29,7 @@
 | product_name          | string     | null: false                    |
 | p_explanation         | text       | null: false                    |
 | category_id           | integer    | null: false                    |
-| p_status_id           | integer    | null: false                    |
+| pstatus_id            | integer    | null: false                    |
 | shipping_charges_id   | integer    | null: false                    |
 | shipping_area_id      | integer    | null: false                    |
 | delivery_date_days_id | integer    | null: false                    |
