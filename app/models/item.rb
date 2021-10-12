@@ -1,12 +1,12 @@
 class Item < ApplicationRecord
+  belongs_to :user
+  
   has_one_attached :image
-  def was_attached?
-    self.image.attached?
-    # レコードにファイルが添付されているかどうかでtrueかfalseを返す
-  end
+
+  validates :image,presence: true
 
   # 商品名必須
-  validates :productname, presence: true
+  validates :productname,presence: true
 
   # # 商品の説明必須
   validates :pexplanation, presence: true
@@ -37,9 +37,26 @@ class Item < ApplicationRecord
   presence: true
 
   # # 価格必須、¥300~¥9,999,999、半角のみ入力OK
-  validates :price, presence: true,
-  inclusion: {in: 300..9999999 },
-  format: { with: /\A[0-9]+\z/ }
+  validates :price, presence: true
+  validates :price,inclusion: {in: 300..9999999 }
+  validates :price,format: { with: /\A[0-9]+\z/ }
+
+  # validates price_custom_error
+
+  # def price_custom_error
+  #   if price.blank?
+  #       errors[:price] = "価格を入力してください"
+  #   # elsif price.length > 255
+  #   #     errors[:price] = "メールアドレスは255文字以内で入力してください"
+  #   elsif price.match(VALID_EMAIL_REGEX) == nil
+  #       errors[:price] = "メールアドレスが不正です"
+  #   end
+  # end
+
+
+  # def errors_blank
+  #   errors[:price].blank?
+  # end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -47,4 +64,5 @@ class Item < ApplicationRecord
   belongs_to :shippingcharge
   belongs_to :shippingarea
   belongs_to :deliverydatedays
+
 end

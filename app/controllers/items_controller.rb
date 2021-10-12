@@ -46,7 +46,8 @@ class ItemsController < ApplicationController
     :shippingcharge_id,
     :shippingarea_id,
     :deliverydatedays_id,
-    :price).merge(user_id: current_user.id)
+    :price,
+    :image).merge(user_id: current_user.id)
     # 引数の大文字小文字でエラーの原因となる。理由を確認
   end
 
