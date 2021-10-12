@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   def index
-    # @items = Item.order("created_at DESC")
-    # @category = Category.order("created_at DESC")
+    @items = Item.all.order("created_at DESC")
+
   end
   def new
     @item = Item.new
@@ -35,8 +35,6 @@ class ItemsController < ApplicationController
   # end
 
   private
-  # params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
-
 
   def item_params
     params.require(:item).permit(:productname,
