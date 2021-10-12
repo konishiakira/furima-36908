@@ -1,5 +1,3 @@
-
-  // 金額を入力した数値をpriceInputという変数に格納する
 const priceInput = document.getElementById("item-price");
 console.log(priceInput);
 priceInput.addEventListener("input", () => {
@@ -7,7 +5,6 @@ priceInput.addEventListener("input", () => {
   console.log(inputValue);
 
   const sales_commission = document.getElementById("add-tax-price");
-  // sales_commission.innerHTML = inputValue * 0.1;
   sales_commission.innerHTML = new Intl.NumberFormat().format(Math.floor(inputValue * 0.1));
 
   const sales_profit = document.getElementById("profit");
