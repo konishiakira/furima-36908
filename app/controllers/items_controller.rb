@@ -1,14 +1,12 @@
 class ItemsController < ApplicationController
   def index
-    # @items = Item.order("created_at DESC")
-    # @category = Category.order("created_at DESC")
+    @items = Item.all.order("created_at DESC")
+
   end
   def new
     @item = Item.new
-    # @room = Room.find(params[:room_id])
-    # @category = Category.order("created_at DESC")
 
-
+    # 「比較のために記述」
     # @message = Message.new
     # @room = Room.find(params[:room_id])
     # @messages = @room.messages.includes(:user)
@@ -21,22 +19,9 @@ class ItemsController < ApplicationController
     else
       render :new
     end
-
-    # @prototype = Prototype.new(prototype_params)
-    # if @prototype.save
-    #   redirect_to root_path
-    # else
-    #   render :new
-    # end
-
   end
 
-  # def show
-  # end
-
   private
-  # params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
-
 
   def item_params
     params.require(:item).permit(:productname,
@@ -51,6 +36,7 @@ class ItemsController < ApplicationController
     # 引数の大文字小文字でエラーの原因となる。理由を確認
   end
 
+  # 「比較のために記述」
   # def set_noedit
   #   @prototype = Prototype.find(params[:id])
   #   unless user_signed_in? && current_user.id == @prototype.user_id
