@@ -1,5 +1,3 @@
-window.addEventListener('load', () => {
-  console.log("OK");
 
   // 金額を入力した数値をpriceInputという変数に格納する
 const priceInput = document.getElementById("item-price");
@@ -17,16 +15,3 @@ priceInput.addEventListener("input", () => {
 })
 
 });
-
-// ex1) Math.round(123.456) // 出力：123
-// ex2) Math.round(123.567) // 出力：124
-// const text = document.getElementById('text');
-
-// const numberWithComma = new Intl.NumberFormat();
-// const price = "512345600";
-
-// const number = numberWithComma.format(price);
-
-// text.innerText = number;
-
-// new Intl.NumberFormat().format(price)

@@ -41,23 +41,6 @@ class Item < ApplicationRecord
   validates :price,inclusion: {in: 300..9999999 }
   validates :price,format: { with: /\A[0-9]+\z/ }
 
-  # validates price_custom_error
-
-  # def price_custom_error
-  #   if price.blank?
-  #       errors[:price] = "価格を入力してください"
-  #   # elsif price.length > 255
-  #   #     errors[:price] = "メールアドレスは255文字以内で入力してください"
-  #   elsif price.match(VALID_EMAIL_REGEX) == nil
-  #       errors[:price] = "メールアドレスが不正です"
-  #   end
-  # end
-
-
-  # def errors_blank
-  #   errors[:price].blank?
-  # end
-
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :pstatus
