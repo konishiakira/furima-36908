@@ -23,8 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @items = Item.find(params[:id])
-
+    item_paramsid
     # 「比較のために記述」    
     # @tweet = Tweet.find(params[:id])
     # @comment = Comment.new
@@ -33,12 +32,12 @@ class ItemsController < ApplicationController
 
   def edit
     # @item = Item.find(params[:id])
-    item_update
+    item_paramsid
   end
 
   def update
     # @item = Item.find(params[:id])
-    item_update
+    item_paramsid
     if @item.update(item_params)
       redirect_to item_path(@item.id)
     else
@@ -56,7 +55,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item = Item.find(params[:id])
+    set_noedit
     @item.destroy
     redirect_to root_path
   end
@@ -82,13 +81,13 @@ class ItemsController < ApplicationController
   # end
 
   def set_noedit
-    @item = Item.find(params[:id])
+    item_paramsid
     unless user_signed_in? && current_user.id == @item.user_id
         redirect_to action: :index
     end
   end
 
-  def item_update
+  def item_paramsid
     @item = Item.find(params[:id])    
   end
 end
