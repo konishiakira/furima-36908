@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!,only: [:new, :create]
+  before_action :authenticate_user!,only: [:new, :create,:edit]
+  before_action :set_noedit, only: :edit
   # ログインしていなかったらリダイレクトでトップページに戻るよ！
   # というのを、showアクションに反映させる
   #購入機能追加時に追加
@@ -29,6 +30,21 @@ class ItemsController < ApplicationController
     # @comments = @tweet.comments.includes(:user)
   end
 
+  def edit
+    binding.pry
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    
+    if @item.update(item_params)
+      redirect_to item_path(@item.id)
+    else
+      render :edit
+    end
+  end
+
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -50,7 +66,6 @@ class ItemsController < ApplicationController
     :deliverydatedays_id,
     :price,
     :image).merge(user_id: current_user.id)
-    # 引数の大文字小文字でエラーの原因となる。理由を確認
   end
 
   # 「比較のために記述」
@@ -60,11 +75,11 @@ class ItemsController < ApplicationController
   #   end
   # end
 
-  # 「比較のために記述」
-  # def set_noedit
-  #   @prototype = Prototype.find(params[:id])
-  #   unless user_signed_in? && current_user.id == @prototype.user_id
-  #       redirect_to action: :index
-  #   end
 
+  def set_noedit
+    @item = Item.find(params[:id])
+    unless user_signed_in? && current_user.id == @item.user_id
+        redirect_to action: :index
+    end
+  end
 end
