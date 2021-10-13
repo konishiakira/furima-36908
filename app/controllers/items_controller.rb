@@ -12,6 +12,14 @@ class ItemsController < ApplicationController
     # @messages = @room.messages.includes(:user)
   end
 
+  def show
+    @items = Item.find(params[:id])
+
+    # @tweet = Tweet.find(params[:id])
+  # @comment = Comment.new
+  # @comments = @tweet.comments.includes(:user)
+  end
+
   def create
     @item = Item.new(item_params)
     if @item.save
