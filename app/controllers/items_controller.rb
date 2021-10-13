@@ -1,4 +1,8 @@
 class ItemsController < ApplicationController
+  before_action :move_to_index, only: [:show]
+  # ログインしていなかったらリダイレクトでトップページに戻るよ！
+  # というのを、showアクションに反映させる
+
   def index
     @items = Item.all.order("created_at DESC")
 
@@ -15,9 +19,10 @@ class ItemsController < ApplicationController
   def show
     @items = Item.find(params[:id])
 
+    # 「比較のために記述」    
     # @tweet = Tweet.find(params[:id])
-  # @comment = Comment.new
-  # @comments = @tweet.comments.includes(:user)
+    # @comment = Comment.new
+    # @comments = @tweet.comments.includes(:user)
   end
 
   def create
@@ -42,6 +47,12 @@ class ItemsController < ApplicationController
     :price,
     :image).merge(user_id: current_user.id)
     # 引数の大文字小文字でエラーの原因となる。理由を確認
+  end
+
+  def move_to_index
+    unless user_signed_in?
+      redirect_to action: :index
+    end
   end
 
   # 「比較のために記述」
