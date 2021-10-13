@@ -1,4 +1,12 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!,only: [:new, :create]
+  # ログインしていなかったらリダイレクトでトップページに戻るよ！
+  # というのを、showアクションに反映させる
+  #購入機能追加時に追加
+
+  # 「比較のために記述」。下記はdeviseを用いない場合の記述。対象メソッドも同様にコメントアウト
+  # before_action :move_to_index, only: [:show]
+
   def index
     @items = Item.all.order("created_at DESC")
 
@@ -10,6 +18,15 @@ class ItemsController < ApplicationController
     # @message = Message.new
     # @room = Room.find(params[:room_id])
     # @messages = @room.messages.includes(:user)
+  end
+
+  def show
+    @items = Item.find(params[:id])
+
+    # 「比較のために記述」    
+    # @tweet = Tweet.find(params[:id])
+    # @comment = Comment.new
+    # @comments = @tweet.comments.includes(:user)
   end
 
   def create
@@ -35,6 +52,13 @@ class ItemsController < ApplicationController
     :image).merge(user_id: current_user.id)
     # 引数の大文字小文字でエラーの原因となる。理由を確認
   end
+
+  # 「比較のために記述」
+  # def move_to_index
+  #   unless user_signed_in?
+  #     redirect_to action: :index
+  #   end
+  # end
 
   # 「比較のために記述」
   # def set_noedit
