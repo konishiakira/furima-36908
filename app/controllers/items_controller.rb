@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!,only: [:new, :create,:edit]
-  before_action :set_noedit, only: :edit
+  before_action :set_noedit, only: [:edit,:destroy]
   # ログインしていなかったらリダイレクトでトップページに戻るよ！
   # というのを、showアクションに反映させる
   #購入機能追加時に追加
@@ -55,7 +55,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    set_noedit
     @item.destroy
     redirect_to root_path
   end
