@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   # ログインしていなかったらリダイレクトでトップページに戻るよ！
   # というのを、showアクションに反映させる
   #購入機能追加時に追加
-  before_action :item_update,only: [:edit,:update]
+  before_action :item_paramsid,only: [:edit,:update]
 
   # 「比較のために記述」。下記はdeviseを用いない場合の記述。対象メソッドも同様にコメントアウト
   # before_action :move_to_index, only: [:show]
