@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    item_paramsid
+    @items = Item.find(params[:id])
     # 「比較のために記述」    
     # @tweet = Tweet.find(params[:id])
     # @comment = Comment.new
