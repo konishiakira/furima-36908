@@ -1,7 +1,10 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, only: [:show]
+  before_action :authenticate_user!, only: [:show]
   # ログインしていなかったらリダイレクトでトップページに戻るよ！
   # というのを、showアクションに反映させる
+
+  # 「比較のために記述」。下記はdeviseを用いない場合の記述。対象メソッドも同様にコメントアウト
+  # before_action :move_to_index, only: [:show]
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -49,11 +52,12 @@ class ItemsController < ApplicationController
     # 引数の大文字小文字でエラーの原因となる。理由を確認
   end
 
-  def move_to_index
-    unless user_signed_in?
-      redirect_to action: :index
-    end
-  end
+  # 「比較のために記述」
+  # def move_to_index
+  #   unless user_signed_in?
+  #     redirect_to action: :index
+  #   end
+  # end
 
   # 「比較のために記述」
   # def set_noedit
