@@ -3,11 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
   # <deviseデフォルトバリデーション>
   # メールアドレスが必須であること。(デフォルト)
   # メールアドレスが一意性であること。（デフォルト）
   # パスワードが必須であること。（デフォルト）
+
+  has_many :buylogs
+  has_many :items
 
 
   validates :nickname, presence: true

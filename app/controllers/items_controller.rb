@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   # ログインしていなかったらリダイレクトでトップページに戻るよ！
   # というのを、showアクションに反映させる
   #購入機能追加時に追加
-  before_action :item_paramsid,only: [:edit,:update]
+  # before_action :souldout_to_index,only: [:edit,:update]
 
   # 「比較のために記述」。下記はdeviseを用いない場合の記述。対象メソッドも同様にコメントアウト
   # before_action :move_to_index, only: [:show]
@@ -12,6 +12,13 @@ class ItemsController < ApplicationController
   def index
     @items = Item.all.order("created_at DESC")
 
+    # @itemsends = Itemsend.all
+    # @itemsend = Itemsend.new
+    # @item = Item.find
+    # @itemsends = Itemsend.all
+    # @prototype = Prototype.find(params[:id])
+    # @comment = Comment.new
+    # @comments = @prototype.comments.includes(:user)
   end
   def new
     @item = Item.new
@@ -33,6 +40,9 @@ class ItemsController < ApplicationController
   def edit
     # @item = Item.find(params[:id])
     item_paramsid
+    if @item.buylog != nil
+      redirect_to action: :index
+    end
   end
 
   def update
@@ -71,13 +81,6 @@ class ItemsController < ApplicationController
     :price,
     :image).merge(user_id: current_user.id)
   end
-
-  # 「比較のために記述」
-  # def move_to_index
-  #   unless user_signed_in?
-  #     redirect_to action: :index
-  #   end
-  # end
 
   def set_noedit
     item_paramsid
