@@ -19,48 +19,48 @@
 ### Association
 
 - has_many :items
-- has_many :buy_logs
+- has_many :buylogs
 
 
 ## items テーブル
 
 | Column                | Type       | Options                        |
 | --------------------- | ---------- | ------------------------------ |
-| product_name          | string     | null: false                    |
+| productname          | string     | null: false                    |
 | p_explanation         | text       | null: false                    |
 | category_id           | integer    | null: false                    |
 | pstatus_id            | integer    | null: false                    |
-| shipping_charges_id   | integer    | null: false                    |
-| shipping_area_id      | integer    | null: false                    |
-| delivery_date_days_id | integer    | null: false                    |
+| shippingcharges_id   | integer    | null: false                    |
+| shippingarea_id      | integer    | null: false                    |
+| deliverydatedays_id | integer    | null: false                    |
 | price                 | integer    | null: false                    |
 | user                  | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- has_one :buy_log
+- has_one :buylog
 - belongs_to :user
 
 
-## item_sends テーブル
+## itemsends テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| postal_code   | string     | null: false                    |
+| postalcode    | string     | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
-| city_address  | string     | null: false                    |
-| building_name | string     |                                |
-| send_tel      | string     | null: false                    |
-| buy_log       | references | null: false, foreign_key: true |
+| cityaddress   | string     | null: false                    |
+| buildingname  | string     |                                |
+| sendtel       | string     | null: false                    |
+| buylog        | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- belongs_to :buy_log
+- belongs_to :buylog
 
-## buy_logs テーブル
+## buylogs テーブル
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
@@ -71,5 +71,5 @@
 ### Association
 
 - belongs_to :item
-- has_one :item_send
+- has_one :itemsend
 - belongs_to :user
