@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :buylog_itemsend do
     # price {3000}   //配送先時にやる必要ない 
     postalcode {"123-4567"}
-    prefecture_id {"石川県"}
+    prefecture_id {3}
     city {"葛飾区"}
     cityaddress {"1-23-4"}
     buildingname {"小嶋ランド"}

@@ -38,6 +38,14 @@ RSpec.describe BuylogItemsend, type: :model do
       @order.valid?
       expect(@order.errors.full_messages).to include("Prefecture can't be blank")
     end
+
+    it "都道府県に「---」が選択されている場合は購入できないこと" do
+      # 都道府県に「---」以外の選択が必須であること
+        @order.prefecture_id = 1
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Prefecture can't be blank")
+      end
+
     it "市区町村が空では保存ができないこと" do
       # 市区町村が必須であること。
       @order.city = nil
@@ -63,6 +71,14 @@ RSpec.describe BuylogItemsend, type: :model do
       @order.valid?
       expect(@order.errors.full_messages).to include("Postalcode is invalid")
     end
+
+    it "郵便番号が半角ハイフンを含む形でなければ購入できないこと" do
+      # ハイフンが半角のみ保存可能であること
+      @order.postalcode = "123ー4567"
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Postalcode is invalid")
+    end
+
     it "電話番号が10桁以上11桁以内でなければ保存ができないこと" do
       # 電話番号は、10桁以上11桁以内のみ保存可能なこと
       # （良い例：09012345678　良くない例：090-1234-5678）。
@@ -77,9 +93,18 @@ RSpec.describe BuylogItemsend, type: :model do
       @order.valid?
       expect(@order.errors.full_messages).to include("Sendtel is invalid")
     end
-  
-  # describe '購入履歴保存確認テスト' do
-    # context '購入ができる場合' do
+    it "電話番号が9桁以下では購入できないこと" do
+      # ９桁以下では購入不可であること
+      @order.sendtel = "12345678"
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Sendtel is invalid")
+    end
+    it "・電話番号が12桁以上では購入できないこと" do
+      # 12桁以上では購入不可であること
+      @order.sendtel = "1234123412341"
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Sendtel is invalid")
+    end
     it 'ユーザーとの関連キー「user_id」との紐付けがないと保存できないこと' do
       #関連キー「user_id」との紐付けがないと保存できないこと
       @buylog.user = nil
@@ -92,7 +117,11 @@ RSpec.describe BuylogItemsend, type: :model do
       @buylog.valid?
       expect(@buylog.errors.full_messages).to include("Item must exist")
     end
-    # end
-  # end
+    it 'tokenが空では購入できないこと' do
+      #「token」がないと保存できないこと
+      @order.token = nil
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Token can't be blank")
+    end
   end
 end

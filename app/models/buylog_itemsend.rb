@@ -1,11 +1,10 @@
 class BuylogItemsend
   include ActiveModel::Model
-  attr_accessor :cdata,:exp_month,:exp_year,:cvc,:token,:price,
+  attr_accessor :token,:price,
   :postalcode,
   :prefecture_id,
   :city,
   :cityaddress,
-  :building_name,
   :buildingname,
   :sendtel,
   :buylog_id,
@@ -31,7 +30,7 @@ class BuylogItemsend
 
   with_options presence: true do
     validates :postalcode,format: { with: /\A\d{3}[-]\d{4}\z/ }
-    validates :prefecture_id
+    validates :prefecture_id,numericality: {other_than: 1, message: "can't be blank"}
     validates :city
     validates :cityaddress
     validates :sendtel,format: { with: /\A\d{10,11}\z/ }
